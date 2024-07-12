@@ -1,13 +1,19 @@
+// import { useEffect, useContext } from 'react';
+// import { Context } from './services/Memory';
+// import { Route, Routes } from "react-router-dom";
 import './App.css'
+import Layout from "./components/shared/Layout";
+// import List from "./components/list/List";
+// import Details from "./components/new/Details";
+// import Modal from "./components/shared/Modal";
 
 function App() {
 
+
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    </>
+    <div className="App">
+      <Layout />
+    </div>
   )
 }
 

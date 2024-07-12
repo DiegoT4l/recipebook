@@ -13,6 +13,10 @@ export default {
         xl: "48px",
         principal: "64px",
       },
+      fontFamily: {
+        "adlam": ["ADLaM Display"],
+        "ubuntu": ["Ubuntu"]
+      }
     },
   },
   plugins: [],

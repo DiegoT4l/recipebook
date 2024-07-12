@@ -1,0 +1,146 @@
+.navbar {
+    @apply bg-[--accent] text-[--secondaryColor] flex justify-between items-center px-2 py-0;
+}
+
+/*TITLE EFFECT*/
+
+/* When you change the amount of characters in the h1, you have to change 
+the with: 14ch and  steps(14, end), if there is 14 characters, put 14, 
+if there is 20 put 20 */
+.navbar__title {
+    font: bold 100% Consolas, Monaco, monospace;
+    border-right: .1em solid rgb(255, 255, 255);
+    width: 13.20ch;
+    margin: 2em 2em;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 5s steps(16, end),
+        blink-caret .5s step-end infinite alternate;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+}
+@keyframes blink-caret {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-left: 20px;
+}
+
+.navbar li {
+    margin-right: 20px;
+}
+
+.navbar a {
+    color: var(--secondaryColor);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar__button-selected a {
+    color: var(--highlights);
+}
+
+.navbar .burger {
+    display: none;
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: var(--secondaryColor);
+    background-color: transparent;
+    border: none;
+}
+
+.navbar.open .burger {
+    color: var(--highlights);
+}
+
+.navbar .burger:focus {
+    outline: none;
+}
+
+.navbar .burger:active {
+    transform: scale(0.9);
+}
+
+.navbar a:hover {
+    color: var(--highlights)
+}
+
+.navbar-fixed {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.userBtn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: var(--interactive);
+}
+
+  /* plus sign */
+.userBtn__sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.userBtn__sign svg {width: 17px;}
+.userBtn__sign svg path {fill: white;}
+
+  /* Button Login */
+.userBtn__text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+}
+  /* hover effect on button width */
+.userBtn:hover {
+    width: 125px;
+    border-radius: 40px;
+    transition-duration: .3s;
+}
+
+.userBtn:hover .userBtn__sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 20px;
+}
+/* hover effect button's text */
+.userBtn:hover .userBtn__text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+}
+/* button click effect*/
+.userBtn:active {
+    transform: translate(2px ,2px);
+}

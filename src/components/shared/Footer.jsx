@@ -1,6 +1,14 @@
+import { useState ,useEffect } from 'react';
 import styles from './Footer.module.css';
 
 function Footer() {
+
+    const [currentYear, setCurrentYear] = useState(null);
+
+    useEffect(() => {
+        setCurrentYear(new Date().getFullYear());
+    }, []);
+
     return (
         <footer className={styles['footer']}>
             <div className={styles['footer-container']}>
@@ -17,7 +25,7 @@ function Footer() {
                     </ul>
                 </div>
                 <hr className={styles['footer__divisor']} />
-                <span className={styles['footer__copyrigth']}>© 2023 <a href="#" class="hover:underline">Recipebook.io™</a>. All Rights Reserved.</span>
+                <span className={styles['footer__copyrigth']}>© {currentYear} <a href="#" class="hover:underline">Recipebook.io™</a>. All Rights Reserved.</span>
             </div>
         </footer>
     );

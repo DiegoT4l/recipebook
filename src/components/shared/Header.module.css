@@ -1,0 +1,36 @@
+.header {
+    position: relative;
+    height: 480px;
+    overflow: hidden;
+    padding: 5rem 0 3rem;
+    background: linear-gradient(black, var(--principalTxT));
+}
+
+header video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0.3;
+}
+
+.header__title {
+    text-align: center;
+    color: var(--secondaryColor);
+    padding: 20px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.header__slogan {
+    text-align: center;
+    color: var(--secondaryColor);
+    padding: 20px;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

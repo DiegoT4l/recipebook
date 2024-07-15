@@ -13,24 +13,41 @@ header video {
     transform: translate(-50%, -50%);
     min-width: 100%;
     min-height: 100%;
-    opacity: 0.3;
+    opacity: 0.2;
 }
 
 .header__title {
+    @apply text-4xl font-bold font-adlam;
     text-align: center;
     color: var(--secondaryColor);
     padding: 20px;
     position: absolute;
-    top: 30%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 .header__slogan {
+    @apply text-2xl font-ubuntu;
     text-align: center;
     color: var(--secondaryColor);
     padding: 20px;
     position: absolute;
-    top: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header__button {
+    @apply bg-[--accent] text-[--secondaryColor] hover:bg-[--interactive];
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: absolute;
+    top: 63%;
     left: 50%;
     transform: translate(-50%, -50%);
 }

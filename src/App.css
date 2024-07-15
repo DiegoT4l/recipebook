@@ -14,7 +14,7 @@
 }
 
 body {
-  @apply bg-[--primaryColor];
+  @apply bg-[--primaryColor] font-ubuntu;
 }
 
 .glass-effect {

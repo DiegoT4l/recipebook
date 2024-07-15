@@ -14,9 +14,9 @@ export default {
         principal: "64px",
       },
       fontFamily: {
-        "adlam": ["ADLaM Display"],
-        "ubuntu": ["Ubuntu"]
-      }
+        "adlam": ["ADLaM Display", "cursive"],
+        "ubuntu": ["Ubuntu", "sans-serif"],
+      },
     },
   },
   plugins: [],

@@ -8,8 +8,16 @@ function Header() {
             <video autoPlay loop muted>
                 <source src={heroVideo} />
             </video>
-            <h1 className={styles["header__title"]}>&nbsp;&nbsp;&nbsp;&nbsp;RECIPEBOOK.IO&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-            <h2 className={styles["header__slogan"]}>Simple Ingredients, Extraordinary Flavors.</h2>
+            <div className={styles["header__title"]}>
+                <h1 >RECIPEBOOK.IO</h1>
+            </div>
+            <div className={styles["header__slogan"]}>
+                <h2 >Simple Ingredients, Extraordinary Flavors.</h2>
+            </div>
+            <div>
+                <button className={styles["header__button"]}>Get Started</button>
+            </div>
+            
         </header>
     );
 }

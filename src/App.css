@@ -13,8 +13,17 @@
   --interactive: #FFB400;
 }
 
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+*, *:before, *:after {box-sizing: inherit;}
+
 body {
   @apply bg-[--primaryColor] font-ubuntu;
+  line-height: 2;
 }
 
 .glass-effect {

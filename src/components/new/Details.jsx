@@ -67,6 +67,12 @@ function Details() {
         setSteps(newSteps);
     };
 
+    const handleBlur = () => {
+        setIsEditing({ type: null, index: null });
+        setCurrentIngredient("");
+        setCurrentStep("");
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("Recipe Name: ", event.target.recipeName.value);
@@ -98,6 +104,7 @@ function Details() {
                                 onClick={() => handleEditIngredient(index)}
                                 onChange={handleIngredientChange}
                                 onKeyDown={handleIngredientKeyDown}
+                                onBlur={handleBlur}
                                 shadow
                                 className="flex-grow"
                             />
@@ -111,10 +118,11 @@ function Details() {
                         name="currentIngredient"
                         type="text"
                         placeholder="Press Enter to add ingredient"
-                        value={currentIngredient}
+                        value={isEditing.type === "ingredient" ? "" : currentIngredient}
                         onChange={handleIngredientChange}
                         onKeyDown={handleIngredientKeyDown}
                         shadow
+                        disabled={isEditing.type === "ingredient"}
                     />
                 </div>
 
@@ -130,6 +138,7 @@ function Details() {
                                 onClick={() => handleEditStep(index)}
                                 onChange={handleStepChange}
                                 onKeyDown={handleStepKeyDown}
+                                onBlur={handleBlur}
                                 shadow
                                 className="flex-grow"
                             />
@@ -142,10 +151,11 @@ function Details() {
                     <Textarea
                         name="currentStep"
                         placeholder="Press Enter to add step"
-                        value={currentStep}
+                        value={isEditing.type === "step" ? "" : currentStep}
                         onChange={handleStepChange}
                         onKeyDown={handleStepKeyDown}
                         shadow
+                        disabled={isEditing.type === "step"}
                     />
                 </div>
 

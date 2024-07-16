@@ -8,8 +8,6 @@ function Details() {
     const [currentIngredient, setCurrentIngredient] = useState("");
     const [currentStep, setCurrentStep] = useState("");
     const [isEditing, setIsEditing] = useState({ type: null, index: null });
-    const [ingredientIsFocused, setingredientIsFocused] = useState(false);
-    const [stepIsFocused, setstepIsFocused] = useState(false);
 
     const handleIngredientChange = (event) => {
         setCurrentIngredient(event.target.value);
@@ -69,22 +67,6 @@ function Details() {
         setSteps(newSteps);
     };
 
-    const handleFocus = (event) => {
-        if (event.target.id.startsWith('menu-ingredient-')) {
-            setingredientIsFocused(true);
-        }else if (event.target.id.startsWith('menu-step-')) {
-            setstepIsFocused(true);
-        }
-    };
-
-    const handleBlur = (event) => {
-        if (event.target.id.startsWith('menu-ingredient-')) {
-            setingredientIsFocused(false);
-        }else if (event.target.id.startsWith('menu-step-')) {
-            setstepIsFocused(false);
-        }
-    };
-
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("Recipe Name: ", event.target.recipeName.value);
@@ -116,8 +98,6 @@ function Details() {
                                 onClick={() => handleEditIngredient(index)}
                                 onChange={handleIngredientChange}
                                 onKeyDown={handleIngredientKeyDown}
-                                onFocus={handleFocus}
-                                onBlur={handleBlur}
                                 shadow
                                 className="flex-grow"
                             />
@@ -127,17 +107,15 @@ function Details() {
                             </div>
                         </div>
                     ))}
-                    {isEditing.type !== "ingredient" && !ingredientIsFocused && (
-                        <TextInput
-                            name="currentIngredient"
-                            type="text"
-                            placeholder="Press Enter to add ingredient"
-                            value={currentIngredient}
-                            onChange={handleIngredientChange}
-                            onKeyDown={handleIngredientKeyDown}
-                            shadow
-                        />
-                    )}
+                    <TextInput
+                        name="currentIngredient"
+                        type="text"
+                        placeholder="Press Enter to add ingredient"
+                        value={currentIngredient}
+                        onChange={handleIngredientChange}
+                        onKeyDown={handleIngredientKeyDown}
+                        shadow
+                    />
                 </div>
 
                 <div>
@@ -161,16 +139,14 @@ function Details() {
                             </div>
                         </div>
                     ))}
-                    {isEditing.type !== "step" && !stepIsFocused && (
-                        <Textarea
-                            name="currentStep"
-                            placeholder="Press Enter to add step"
-                            value={currentStep}
-                            onChange={handleStepChange}
-                            onKeyDown={handleStepKeyDown}
-                            shadow
-                        />
-                    )}
+                    <Textarea
+                        name="currentStep"
+                        placeholder="Press Enter to add step"
+                        value={currentStep}
+                        onChange={handleStepChange}
+                        onKeyDown={handleStepKeyDown}
+                        shadow
+                    />
                 </div>
 
                 <Button type="submit">Create Recipe</Button>

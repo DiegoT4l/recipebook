@@ -1,5 +1,6 @@
 import { Button, Label, TextInput, Textarea } from "flowbite-react";
 import { useState } from "react";
+import DropdownMenu from "./DropdownMenu";
 
 function Details() {
     const [ingredients, setIngredients] = useState([]);
@@ -107,13 +108,8 @@ function Details() {
                             />
                             <div className="relative ml-2">
                                 <Button type="button" className="ml-2" onClick={() => document.getElementById(`menu-ingredient-${index}`).classList.toggle('hidden')}>...</Button>
-                                <div id={`menu-ingredient-${index}`} className="absolute z-20 gap-2 left-10 mt-2 w-32 bg-white border rounded-lg shadow-lg hidden">
-                                    <div className="flex flex-col gap-2 p-2">
-                                        <Button type="button" className="w-full text-left px-4 py-2" onClick={() => handleEditIngredient(index)}>Edit</Button>
-                                        <Button type="button" className="w-full text-left px-4 py-2" onClick={() => handleDeleteIngredient(index)}>Delete</Button>
-                                    </div>
-
-                                </div>
+                                <DropdownMenu id={`menu-ingredient-${index}`} onEdit={handleEditIngredient} onDelete={handleDeleteIngredient} index={index} />
+                                
                             </div>
                         </div>
                     ))}
@@ -154,10 +150,7 @@ function Details() {
                             />
                             <div className="relative ml-2">
                                 <Button type="button" className="ml-2" onClick={() => document.getElementById(`menu-step-${index}`).classList.toggle('hidden')}>...</Button>
-                                <div id={`menu-step-${index}`} className="absolute right-0 mt-2 w-32 bg-white border rounded-lg shadow-lg hidden">
-                                    <Button type="button" className="w-full text-left px-4 py-2" onClick={() => handleEditStep(index)}>Edit</Button>
-                                    <Button type="button" className="w-full text-left px-4 py-2" onClick={() => handleDeleteStep(index)}>Delete</Button>
-                                </div>
+                                <DropdownMenu id={`menu-step-${index}`} onEdit={handleEditStep} onDelete={handleDeleteStep} index={index} />
                             </div>
                         </div>
                     ))}

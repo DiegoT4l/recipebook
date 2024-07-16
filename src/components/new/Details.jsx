@@ -8,6 +8,8 @@ function Details() {
     const [currentIngredient, setCurrentIngredient] = useState("");
     const [currentStep, setCurrentStep] = useState("");
     const [isEditing, setIsEditing] = useState({ type: null, index: null });
+    const [ingredientIsFocused, setingredientIsFocused] = useState(false);
+    const [stepIsFocused, setstepIsFocused] = useState(false);
 
     const handleIngredientChange = (event) => {
         setCurrentIngredient(event.target.value);
@@ -19,7 +21,14 @@ function Details() {
 
     const handleIngredientKeyDown = (event) => {
         if (event.key === 'Enter' && currentIngredient.trim() !== "") {
-            setIngredients([...ingredients, currentIngredient]);
+            if (isEditing.type === "ingredient" && isEditing.index !== null) {
+                const newIngredients = [...ingredients];
+                newIngredients[isEditing.index] = currentIngredient;
+                setIngredients(newIngredients);
+                setIsEditing({ type: null, index: null });
+            } else {
+                setIngredients([...ingredients, currentIngredient]);
+            }
             setCurrentIngredient("");
             event.preventDefault();
         }
@@ -27,7 +36,14 @@ function Details() {
 
     const handleStepKeyDown = (event) => {
         if (event.key === 'Enter' && currentStep.trim() !== "") {
-            setSteps([...steps, currentStep]);
+            if (isEditing.type === "step" && isEditing.index !== null) {
+                const newSteps = [...steps];
+                newSteps[isEditing.index] = currentStep;
+                setSteps(newSteps);
+                setIsEditing({ type: null, index: null });
+            } else {
+                setSteps([...steps, currentStep]);
+            }
             setCurrentStep("");
             event.preventDefault();
         }
@@ -43,28 +59,6 @@ function Details() {
         setCurrentStep(steps[index]);
     };
 
-    const handleUpdateIngredient = (event) => {
-        if (event.key === 'Enter' && currentIngredient.trim() !== "") {
-            const newIngredients = [...ingredients];
-            newIngredients[isEditing.index] = currentIngredient;
-            setIngredients(newIngredients);
-            setIsEditing({ type: null, index: null });
-            setCurrentIngredient("");
-            event.preventDefault();
-        }
-    };
-
-    const handleUpdateStep = (event) => {
-        if (event.key === 'Enter' && currentStep.trim() !== "") {
-            const newSteps = [...steps];
-            newSteps[isEditing.index] = currentStep;
-            setSteps(newSteps);
-            setIsEditing({ type: null, index: null });
-            setCurrentStep("");
-            event.preventDefault();
-        }
-    };
-
     const handleDeleteIngredient = (index) => {
         const newIngredients = ingredients.filter((_, i) => i !== index);
         setIngredients(newIngredients);
@@ -73,6 +67,22 @@ function Details() {
     const handleDeleteStep = (index) => {
         const newSteps = steps.filter((_, i) => i !== index);
         setSteps(newSteps);
+    };
+
+    const handleFocus = (event) => {
+        if (event.target.id.startsWith('menu-ingredient-')) {
+            setingredientIsFocused(true);
+        }else if (event.target.id.startsWith('menu-step-')) {
+            setstepIsFocused(true);
+        }
+    };
+
+    const handleBlur = (event) => {
+        if (event.target.id.startsWith('menu-ingredient-')) {
+            setingredientIsFocused(false);
+        }else if (event.target.id.startsWith('menu-step-')) {
+            setstepIsFocused(false);
+        }
     };
 
     const handleSubmit = (event) => {
@@ -101,29 +111,23 @@ function Details() {
                         <div key={index} className="flex mb-2 items-center">
                             <TextInput
                                 type="text"
-                                value={ingredient}
-                                readOnly
+                                value={isEditing.type === "ingredient" && isEditing.index === index ? currentIngredient : ingredient}
+                                readOnly={!(isEditing.type === "ingredient" && isEditing.index === index)}
+                                onClick={() => handleEditIngredient(index)}
+                                onChange={handleIngredientChange}
+                                onKeyDown={handleIngredientKeyDown}
+                                onFocus={handleFocus}
+                                onBlur={handleBlur}
                                 shadow
                                 className="flex-grow"
                             />
                             <div className="relative ml-2">
                                 <Button type="button" className="ml-2" onClick={() => document.getElementById(`menu-ingredient-${index}`).classList.toggle('hidden')}>...</Button>
                                 <DropdownMenu id={`menu-ingredient-${index}`} onEdit={handleEditIngredient} onDelete={handleDeleteIngredient} index={index} />
-                                
                             </div>
                         </div>
                     ))}
-                    {isEditing.type === "ingredient" ? (
-                        <TextInput
-                            name="currentIngredient"
-                            type="text"
-                            placeholder="Press Enter to update ingredient"
-                            value={currentIngredient}
-                            onChange={handleIngredientChange}
-                            onKeyDown={handleUpdateIngredient}
-                            shadow
-                        />
-                    ) : (
+                    {isEditing.type !== "ingredient" && !ingredientIsFocused && (
                         <TextInput
                             name="currentIngredient"
                             type="text"
@@ -143,8 +147,11 @@ function Details() {
                     {steps.map((step, index) => (
                         <div key={index} className="flex mb-2 items-center">
                             <Textarea
-                                value={step}
-                                readOnly
+                                value={isEditing.type === "step" && isEditing.index === index ? currentStep : step}
+                                readOnly={!(isEditing.type === "step" && isEditing.index === index)}
+                                onClick={() => handleEditStep(index)}
+                                onChange={handleStepChange}
+                                onKeyDown={handleStepKeyDown}
                                 shadow
                                 className="flex-grow"
                             />
@@ -154,16 +161,7 @@ function Details() {
                             </div>
                         </div>
                     ))}
-                    {isEditing.type === "step" ? (
-                        <Textarea
-                            name="currentStep"
-                            placeholder="Press Enter to update step"
-                            value={currentStep}
-                            onChange={handleStepChange}
-                            onKeyDown={handleUpdateStep}
-                            shadow
-                        />
-                    ) : (
+                    {isEditing.type !== "step" && !stepIsFocused && (
                         <Textarea
                             name="currentStep"
                             placeholder="Press Enter to add step"

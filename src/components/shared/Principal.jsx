@@ -5,9 +5,9 @@ import Header from './Header';
 function Principal({ children }) {
     return (
         <div className={styles.principal}>
-            <div className={styles.aside}>
+            {/* <div className={styles.aside}>
                 <Header />
-            </div>
+            </div> */}
             <main className={styles.main}>
                 {children}
             </main>

@@ -25,7 +25,7 @@ function Footer() {
                     </ul>
                 </div>
                 <hr className={styles['footer__divisor']} />
-                <span className={styles['footer__copyrigth']}>© {currentYear} <a href="#" class="hover:underline">Recipebook.io™</a>. All Rights Reserved.</span>
+                <span className={styles['footer__copyrigth']}>© {currentYear} <a href="#" className="hover:underline">Recipebook.io™</a>. All Rights Reserved.</span>
             </div>
         </footer>
     );
